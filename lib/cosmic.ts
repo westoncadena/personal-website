@@ -1,13 +1,11 @@
 import { createBucketClient } from '@cosmicjs/sdk';
-import { Post } from './types';
-import { GlobalData } from './types';
-import { Author } from './types';
+import { Post, GlobalData, Author } from './types';
 
 const cosmic = createBucketClient({
   // @ts-ignore
-  bucketSlug: process.env.NEXT_PUBLIC_COSMIC_BUCKET_SLUG ?? '',
+  bucketSlug: process.env.COSMIC_BUCKET_SLUG ?? '',
   // @ts-ignore
-  readKey: process.env.NEXT_PUBLIC_COSMIC_READ_KEY ?? '',
+  readKey: process.env.COSMIC_READ_KEY ?? '',
 });
 export default cosmic;
 
@@ -50,14 +48,14 @@ export async function getAllPosts(): Promise<Post[]> {
   return Promise.resolve([]);
 }
 
-export async function getPost({ params }: { params: { slug: string } }): Promise<Post> {
+export async function getPost(slug: string): Promise<Post> {
   try {
     // Get post
     const data: any = await Promise.resolve(
       cosmic.objects
         .findOne({
           type: 'posts',
-          slug: params.slug,
+          slug,
         })
         .props(['id', 'type', 'slug', 'title', 'metadata', 'created_at'])
         .depth(1)
@@ -70,7 +68,7 @@ export async function getPost({ params }: { params: { slug: string } }): Promise
   return Promise.resolve({} as Post);
 }
 
-export async function getRelatedPosts({ params }: { params: { slug: string } }): Promise<Post[]> {
+export async function getRelatedPosts(slug: string): Promise<Post[]> {
   try {
     // Get suggested posts
     const data: any = await Promise.resolve(
@@ -78,7 +76,7 @@ export async function getRelatedPosts({ params }: { params: { slug: string } }):
         .find({
           type: 'posts',
           slug: {
-            $ne: params?.slug,
+            $ne: slug,
           },
         })
         .props(['id', 'type', 'slug', 'title', 'metadata', 'created_at'])
@@ -93,13 +91,13 @@ export async function getRelatedPosts({ params }: { params: { slug: string } }):
   return Promise.resolve([]);
 }
 
-export async function getAuthor({ params }: { params: { id: string; slug: string } }): Promise<Author> {
+export async function getAuthor(slug: string): Promise<Author> {
   try {
     const data: any = await Promise.resolve(
       cosmic.objects
         .findOne({
           type: 'authors',
-          slug: params.slug,
+          slug,
         })
         .props('id,title')
         .depth(1)
@@ -112,14 +110,14 @@ export async function getAuthor({ params }: { params: { id: string; slug: string
   return Promise.resolve({} as Author);
 }
 
-export async function getAuthorPosts({ authorId }: { authorId: string }): Promise<Post[]> {
+export async function getAuthorPosts(id: string): Promise<Post[]> {
   try {
     // Get Author's posts
     const data: any = await Promise.resolve(
       cosmic.objects
         .find({
           type: 'posts',
-          'metadata.author': authorId,
+          'metadata.author': id,
         })
         .props(['id', 'type', 'slug', 'title', 'metadata', 'created_at'])
         .sort('random')
