@@ -4,6 +4,7 @@ import { getGlobalData } from '../lib/cosmic';
 import Generator from 'next/font/local';
 import Banner from '../components/Banner';
 import Header from '../components/Header';
+import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const sans = Generator({
@@ -31,6 +32,7 @@ export default async function RootLayout({
       <body className="bg-white dark:bg-zinc-950">
         <Banner />
         <Header name={siteData} />
+        <Navbar />
         {children}
         <Footer />
       </body>
