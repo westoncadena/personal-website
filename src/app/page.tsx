@@ -9,14 +9,14 @@ export default function Home() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/profile.jpg"
+            src="/profile-2.jpg"
             alt="Background"
             fill
             className="hero-image"
             priority
           />
           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/50 dark:bg-black/70" />
+          <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
         </div>
 
         {/* Content */}
