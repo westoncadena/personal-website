@@ -17,7 +17,7 @@ import { useState, useRef, useEffect } from "react";
 const DesktopHeader = ({ theme, setTheme }: { theme: string | undefined, setTheme: (theme: string) => void }) => (
     <div className="hidden md:flex container h-14 items-center px-8 py-8">
         <Link href="/" className="mr-8 flex items-center space-x-2">
-            <span className="font-bold">WESTON</span>
+            <span className="font-bold">WESTON CADENA</span>
         </Link>
 
         <Menubar className="flex-1 rounded-none border-none bg-transparent">
@@ -53,28 +53,11 @@ const DesktopHeader = ({ theme, setTheme }: { theme: string | undefined, setThem
                 </MenubarContent>
             </MenubarMenu>
 
-            <MenubarMenu>
-                <MenubarTrigger className="font-medium">Contact</MenubarTrigger>
-                <MenubarContent>
-                    <MenubarItem>
-                        Email
-                    </MenubarItem>
-
-                    <a
-                        href="https://www.linkedin.com/in/westoncadena/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <MenubarItem>
-                            LinkedIn
-                        </MenubarItem>
-                    </a>
-
-                    <MenubarItem>
-                        Schedule Call
-                    </MenubarItem>
-                </MenubarContent>
-            </MenubarMenu>
+            <Link href="/contact">
+                <MenubarMenu>
+                    <MenubarTrigger className="font-medium">Contact</MenubarTrigger>
+                </MenubarMenu>
+            </Link>
         </Menubar>
 
         <Button
@@ -129,7 +112,7 @@ const MobileHeader = ({
                 </Button>
 
                 <Link href="/" className="flex items-center space-x-2">
-                    <span className="font-bold">WESTON</span>
+                    <span className="font-bold">WESTON CADENA</span>
                 </Link>
 
                 <Button
@@ -146,6 +129,9 @@ const MobileHeader = ({
                 <nav ref={menuRef} className="border-t flex flex-col space-y-4 p-4 bg-background/95 backdrop-blur">
                     <Link href="/about" className="px-4 py-2 hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>
                         About
+                    </Link>
+                    <Link href="/posts" className="px-4 py-2 hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>
+                        Blog
                     </Link>
                     <Link href="/projects" className="px-4 py-2 hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>
                         Projects

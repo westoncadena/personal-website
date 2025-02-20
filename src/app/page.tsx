@@ -26,10 +26,10 @@ export default function Home() {
               Weston Cadena
             </h1>
             <h2 className="text-xl text-white/80 sm:text-2xl max-w-xl">
-              Full Stack Developer & Software Engineer
+              Graduate Computer Science Student
             </h2>
             <p className="text-lg text-white/70">
-              Building elegant solutions to complex problems with modern technologies.
+              Building elegant solutions to complex problems, alongside my journey as a part-time adventurer.
             </p>
             <div className="flex gap-4">
               <Link

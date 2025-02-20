@@ -70,8 +70,8 @@ const ContactPage = () => {
                             style={{ objectFit: 'cover' }}
                         />
                     </div>
-                    <h1 className="text-2xl font-bold text-white mb-2">Weston Cadena</h1>
-                    <p className="text-gray-300">Let&apos;s connect! I&apos;m always up for a good conversation or a new perspective.</p>
+                    <h1 className="text-2xl font-bold mb-2">Weston Cadena</h1>
+                    <p >Let&apos;s connect! I&apos;m always up for a good conversation or a new perspective.</p>
                 </div>
 
                 {/* Links Section */}
