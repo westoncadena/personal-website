@@ -9,7 +9,7 @@ export default function Home() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/profile-2.jpg"
+            src="/profile.jpg"
             alt="Background"
             fill
             className="hero-image"
