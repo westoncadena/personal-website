@@ -16,7 +16,7 @@ export default function Home() {
             priority
           />
           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/50 dark:bg-black/70" />
+          <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
         </div>
 
         {/* Content */}

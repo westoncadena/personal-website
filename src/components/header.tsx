@@ -24,16 +24,15 @@ const DesktopHeader = ({ theme, setTheme }: { theme: string | undefined, setThem
             <MenubarMenu>
                 <MenubarTrigger className="font-medium">About</MenubarTrigger>
                 <MenubarContent>
-                    <MenubarItem>
-                        Background
-                    </MenubarItem>
-                    <MenubarItem>
-                        Skills
-                    </MenubarItem>
-                    <MenubarSeparator />
-                    <MenubarItem>
-                        Resume
-                    </MenubarItem>
+                    <Link href="/about#background">
+                        <MenubarItem>Background</MenubarItem>
+                    </Link>
+                    <Link href="/about#skills">
+                        <MenubarItem>Skills</MenubarItem>
+                    </Link>
+                    <Link href="/about#resume">
+                        <MenubarItem>Resume</MenubarItem>
+                    </Link>
                 </MenubarContent>
             </MenubarMenu>
 
@@ -127,7 +126,7 @@ const MobileHeader = ({
 
             {isMenuOpen && (
                 <nav ref={menuRef} className="border-t flex flex-col space-y-4 p-4 bg-background/95 backdrop-blur">
-                    <Link href="/about" className="px-4 py-2 hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>
+                    <Link href="/about" className="px-4 py-2 hover:bg-accent rounded-md">
                         About
                     </Link>
                     <Link href="/posts" className="px-4 py-2 hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>
