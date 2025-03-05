@@ -7,6 +7,7 @@ import { FileText, Download } from "lucide-react";
 
 const AboutPage = () => {
     const [backgroundRef, backgroundInView] = useInView({ threshold: 0.2 });
+    const [interestsRef, interestsInView] = useInView({ threshold: 0.2 });
     const [skillsRef, skillsInView] = useInView({ threshold: 0.2 });
     const [resumeRef, resumeInView] = useInView({ threshold: 0.2 });
 
@@ -22,6 +23,15 @@ const AboutPage = () => {
                                 }`}
                         >
                             Background
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href="#interests"
+                            className={`block p-2 rounded transition-colors ${interestsInView ? 'bg-accent text-accent-foreground' : ''
+                                }`}
+                        >
+                            Interests
                         </Link>
                     </li>
                     <li>
@@ -53,7 +63,46 @@ const AboutPage = () => {
                     className="mb-16"
                 >
                     <h2 className="text-2xl font-bold mb-6">Background</h2>
-                    {/* Your background content */}
+                    <div className="prose dark:prose-invert">
+                        <p>
+                            I&apos;m Weston Cadena, a Computer Science and Engineering enthusiast with a strong focus on high-performance computing,
+                            machine learning, and cutting-edge software development. Currently pursuing my Master&apos;s in Computer Science at Texas A&M University,
+                            I&apos;ve had the opportunity to work with national laboratories like Lawrence Livermore and Los Alamos,
+                            where I&apos;ve contributed to cutting-edge research and development in supercomputing environments.
+                        </p>
+                        <p>
+                            My academic journey has been marked by a strong GPA of 3.97, with coursework focusing on Deep Learning,
+                            Parallel Computing, Machine Learning, and Computer Architecture. Beyond my technical skills,
+                            I value collaboration, problem-solving, and continuous learning.
+                        </p>
+                    </div>
+                </section>
+
+                <section
+                    id="interests"
+                    ref={interestsRef}
+                    className="mb-16"
+                >
+                    <h2 className="text-2xl font-bold mb-6">Personal Interests</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-accent p-6 rounded-lg">
+                            <h3 className="text-xl font-semibold mb-3">Adventure & Exploration</h3>
+                            <ul className="space-y-2 list-disc pl-5">
+                                <li>Avid traveler who has visited over 20 countries, seeking authentic cultural experiences</li>
+                                <li>Passionate about pure, raw adventure and exploring the unknown</li>
+                                <li>PADI (scuba) certified and currently working on skydiving licenses</li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-accent p-6 rounded-lg">
+                            <h3 className="text-xl font-semibold mb-3">Outdoor Activities</h3>
+                            <ul className="space-y-2 list-disc pl-5">
+                                <li>Enthusiastic fisherman who enjoys the peace and challenge of the sport</li>
+                                <li>Marathon runner with 4 completed races and a personal best of 3 hours and 20 minutes</li>
+                                <li>Maintain a koi pond and care for a beta fish imported from Thailand</li>
+                            </ul>
+                        </div>
+                    </div>
                 </section>
 
                 <section
@@ -68,20 +117,20 @@ const AboutPage = () => {
                         <div>
                             <h3 className="text-xl font-semibold mb-4">Programming Languages</h3>
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
-                                    <div className="font-medium">Python</div>
-                                </div>
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
-                                    <div className="font-medium">JavaScript/TypeScript</div>
-                                </div>
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
-                                    <div className="font-medium">Java</div>
-                                </div>
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
                                     <div className="font-medium">C++</div>
                                 </div>
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
+                                    <div className="font-medium">Python</div>
+                                </div>
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
+                                    <div className="font-medium">JavaScript/TypeScript</div>
+                                </div>
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
                                     <div className="font-medium">SQL</div>
+                                </div>
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
+                                    <div className="font-medium">HTML/CSS</div>
                                 </div>
                             </div>
                         </div>
@@ -90,16 +139,16 @@ const AboutPage = () => {
                         <div>
                             <h3 className="text-xl font-semibold mb-4">Web Technologies</h3>
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
                                     <div className="font-medium">React</div>
                                 </div>
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
                                     <div className="font-medium">Next.js</div>
                                 </div>
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
                                     <div className="font-medium">Node.js</div>
                                 </div>
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
                                     <div className="font-medium">TailwindCSS</div>
                                 </div>
                             </div>
@@ -109,17 +158,20 @@ const AboutPage = () => {
                         <div>
                             <h3 className="text-xl font-semibold mb-4">Tools & Technologies</h3>
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
                                     <div className="font-medium">Git</div>
                                 </div>
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
-                                    <div className="font-medium">Docker</div>
-                                </div>
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
-                                    <div className="font-medium">AWS</div>
-                                </div>
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
                                     <div className="font-medium">Linux</div>
+                                </div>
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
+                                    <div className="font-medium">MPI</div>
+                                </div>
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
+                                    <div className="font-medium">NumPy</div>
+                                </div>
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
+                                    <div className="font-medium">Docker/Buildah</div>
                                 </div>
                             </div>
                         </div>
@@ -128,17 +180,20 @@ const AboutPage = () => {
                         <div>
                             <h3 className="text-xl font-semibold mb-4">Core Computer Science</h3>
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
-                                    <div className="font-medium">Data Structures</div>
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
+                                    <div className="font-medium">High Performance Computing</div>
                                 </div>
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
-                                    <div className="font-medium">Algorithms</div>
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
+                                    <div className="font-medium">Machine Learning</div>
                                 </div>
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
-                                    <div className="font-medium">Database Design</div>
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
+                                    <div className="font-medium">Parallel Computing</div>
                                 </div>
-                                <div className="flex items-center space-x-2 bg-accent/10 p-3 rounded-lg">
-                                    <div className="font-medium">Software Engineering</div>
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
+                                    <div className="font-medium">Computer Architecture</div>
+                                </div>
+                                <div className="flex items-center space-x-2 bg-accent p-3 rounded-lg">
+                                    <div className="font-medium">Algorithms & Data Structures</div>
                                 </div>
                             </div>
                         </div>

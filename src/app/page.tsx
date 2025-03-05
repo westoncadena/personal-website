@@ -9,7 +9,7 @@ export default function Home() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/profile-2.jpg"
+            src="/profile.jpg"
             alt="Background"
             fill
             className="hero-image"
@@ -39,17 +39,23 @@ export default function Home() {
                 Contact Me
               </Link>
               <Link
+                href="/about"
+                className="inline-flex items-center justify-center rounded-md border border-white/30 px-6 py-3 text-sm font-medium text-white hover:bg-white/20"
+              >
+                About Me
+              </Link>
+              <Link
                 href="/posts"
                 className="inline-flex items-center justify-center rounded-md border border-white/30 px-6 py-3 text-sm font-medium text-white hover:bg-white/20"
               >
                 Read Blog
               </Link>
-              <Link
+              {/* <Link
                 href="/projects"
                 className="inline-flex items-center justify-center rounded-md border border-white/30 px-6 py-3 text-sm font-medium text-white hover:bg-white/20"
               >
                 View Projects
-              </Link>
+              </Link> */}
 
             </div>
           </div>

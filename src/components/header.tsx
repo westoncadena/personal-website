@@ -5,7 +5,6 @@ import {
     MenubarContent,
     MenubarItem,
     MenubarMenu,
-    MenubarSeparator,
     MenubarTrigger,
 } from "@/components/ui/menubar";
 import { Menu, X, Moon, Sun } from 'lucide-react';
@@ -27,6 +26,9 @@ const DesktopHeader = ({ theme, setTheme }: { theme: string | undefined, setThem
                     <Link href="/about#background">
                         <MenubarItem>Background</MenubarItem>
                     </Link>
+                    <Link href="/about#interests">
+                        <MenubarItem>Interests</MenubarItem>
+                    </Link>
                     <Link href="/about#skills">
                         <MenubarItem>Skills</MenubarItem>
                     </Link>
@@ -36,7 +38,7 @@ const DesktopHeader = ({ theme, setTheme }: { theme: string | undefined, setThem
                 </MenubarContent>
             </MenubarMenu>
 
-            <MenubarMenu>
+            {/* <MenubarMenu>
                 <MenubarTrigger className="font-medium">Projects</MenubarTrigger>
                 <MenubarContent>
                     <MenubarItem>
@@ -50,7 +52,13 @@ const DesktopHeader = ({ theme, setTheme }: { theme: string | undefined, setThem
                         Case Studies
                     </MenubarItem>
                 </MenubarContent>
-            </MenubarMenu>
+            </MenubarMenu> */}
+
+            <Link href="/posts">
+                <MenubarMenu>
+                    <MenubarTrigger className="font-medium">Blog</MenubarTrigger>
+                </MenubarMenu>
+            </Link>
 
             <Link href="/contact">
                 <MenubarMenu>
@@ -132,9 +140,9 @@ const MobileHeader = ({
                     <Link href="/posts" className="px-4 py-2 hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>
                         Blog
                     </Link>
-                    <Link href="/projects" className="px-4 py-2 hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>
+                    {/* <Link href="/projects" className="px-4 py-2 hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>
                         Projects
-                    </Link>
+                    </Link> */}
                     <Link href="/contact" className="px-4 py-2 hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>
                         Contact
                     </Link>
