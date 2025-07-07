@@ -65,6 +65,11 @@ const DesktopHeader = ({ theme, setTheme }: { theme: string | undefined, setThem
                     <MenubarTrigger className="font-medium">Contact</MenubarTrigger>
                 </MenubarMenu>
             </Link>
+            <Link href="/portfolio">
+                <MenubarMenu>
+                    <MenubarTrigger className="font-medium">Portfolio</MenubarTrigger>
+                </MenubarMenu>
+            </Link>
         </Menubar>
 
         <Button
