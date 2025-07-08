@@ -157,12 +157,16 @@ const MobileHeader = ({
     );
 };
 
-const Header = () => {
+const Header = ({ transparent = false }: { transparent?: boolean }) => {
     const { theme, setTheme } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <header className={`sticky top-0 z-50 w-full ${
+            transparent
+                ? 'bg-transparent border-none'
+                : 'border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'
+        }`}>
             <DesktopHeader theme={theme} setTheme={setTheme} />
             <MobileHeader
                 theme={theme}

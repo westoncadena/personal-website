@@ -18,7 +18,7 @@ type PortfolioListProps = {
 const PortfolioList: React.FC<PortfolioListProps> = ({ portfolios }) => {
   return (
     <div className="mt-12">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Other Portfolios</h2>
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">All Portfolios</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {portfolios.map((portfolio, idx) => (
           <div key={idx} className="bg-white  shadow p-4 flex flex-col">
