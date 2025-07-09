@@ -34,8 +34,8 @@ export default function PortfolioSlugPage() {
 
   return (
     <div className="w-full mx-auto py-8 px-4">
-      <h1 className="text-3xl font-bold mb-2 text-gray-800">{portfolio.title}</h1>
-      <p className="mb-6 text-gray-800">{portfolio.description}</p>
+      <h1 className="text-3xl font-bold mb-2 text-foreground">{portfolio.title}</h1>
+      <p className="mb-6 text-foreground">{portfolio.description}</p>
       {/* Masonry layout */}
       <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
         {portfolio.images.map((img: { src: string; orientation: string }, idx: number) => (
@@ -50,7 +50,7 @@ export default function PortfolioSlugPage() {
               (img.orientation === "vertical"
                 ? "w-full aspect-[2/3]"  // 2:3 aspect ratio for vertical
                 : "w-full aspect-[3/2]") + // 3:2 aspect ratio for horizontal
-              " object-cover mb-4 break-inside-avoid cursor-pointer transition-transform hover:scale-105"
+              " object-cover mb-4 break-inside-avoid cursor-pointer transition-transform hover:scale-105 active:scale-95 md:hover:scale-105"
             }
           />
         ))}

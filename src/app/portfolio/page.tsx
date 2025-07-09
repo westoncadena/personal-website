@@ -6,6 +6,19 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from "framer-motion";
+import { Babylonica, Libre_Barcode_39 } from "next/font/google";
+
+const babylonica = Babylonica({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-babylonica"
+});
+
+const libreBarcode = Libre_Barcode_39({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-libre-barcode"
+});
 
 const portfolios: Portfolio[] = [
   {
@@ -60,9 +73,11 @@ const PortfolioPage: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="w-full px-6 sm:px-8 md:px-12 py-4">
-        <div className="flex items-center justify-between mb-4 border-b border-black">
-          <h1 className="text-3xl font-serif">PORTFOLIO</h1>
-          <span className="text-lg font-bold bg-black text-white px-4 py-1">048</span>
+        <div className="flex items-center justify-between mb-4 border-b border-border">
+          <h1 className="text-3xl font-serif text-foreground">PORTFOLIO</h1>
+          <span className="text-lg font-bold bg-primary text-primary-foreground px-4 py-1">
+            {(currentIndex + 1).toString().padStart(3, '0')}
+          </span>
         </div>
         {/* Image Animation */}
         <AnimatePresence mode="wait">
@@ -149,19 +164,19 @@ const PortfolioPage: React.FC = () => {
           <div className="block md:hidden border-t border-border" />
 
           {/* Right: Author, Navigation */}
-          <div className="flex flex-col items-start md:items-end gap-4 w-full md:w-[220px] lg:w-[260px] xl:w-[320px]">
+          <div className="flex flex-col items-start md:items-end gap-4 w-full md:w-[400px] lg:w-[500px] xl:w-[700px]">
             {/* Static Navigation and Author Info */}
             <div className="w-full">
               {/* Arrows above image on mobile */}
               <div className="flex justify-between mb-2 md:hidden">
                 <button 
-                  className="rounded-full border-2 border-gray-800 p-2 text-sm md:text-base hover:bg-gray-800 hover:text-white transition-colors"
+                  className="rounded-full border-2 border-border p-2 text-sm md:text-base hover:bg-primary hover:text-primary-foreground transition-colors"
                   onClick={handlePrevious}
                 >
                   <ArrowLeft className="w-5 h-5" />
                 </button>
                 <button 
-                  className="rounded-full border-2 border-gray-800 p-2 ml-2 text-sm md:text-base hover:bg-gray-800 hover:text-white transition-colors"
+                  className="rounded-full border-2 border-border p-2 ml-2 text-sm md:text-base hover:bg-primary hover:text-primary-foreground transition-colors"
                   onClick={handleNext}
                 >
                   <ArrowRight className="w-5 h-5" />
@@ -169,26 +184,30 @@ const PortfolioPage: React.FC = () => {
               </div>
 
               {/* Arrows in sidebar on desktop */}
-              <div className="hidden md:block border-l-2 border-black ml-24 pl-8">
+              <div className="hidden md:block border-l-2 border-border ml-24 pl-8">
                 <div className="w-full text-right mb-2">
                   <button 
-                    className="rounded-full border-2 border-gray-800 p-2 text-sm md:text-base hover:bg-gray-800 hover:text-white transition-colors"
+                    className="rounded-full border-2 border-border p-2 text-sm md:text-base hover:bg-primary hover:text-primary-foreground transition-colors"
                     onClick={handlePrevious}
                   >
                     <ArrowLeft className="w-5 h-5" />
                   </button>
                   <button 
-                    className="rounded-full border-2 border-gray-800 p-2 ml-2 text-sm md:text-base hover:bg-gray-800 hover:text-white transition-colors"
+                    className="rounded-full border-2 border-border p-2 ml-2 text-sm md:text-base hover:bg-primary hover:text-primary-foreground transition-colors"
                     onClick={handleNext}
                   >
                     <ArrowRight className="w-5 h-5" />
                   </button>
                 </div>
                 <div className="w-full text-left">
-                  <span className="italic text-xl">{currentPortfolio.author}</span>
+                  <span className={`${babylonica.className} text-5xl leading-none`}>
+                    {currentPortfolio.author}
+                  </span>
                 </div>
                 <div className="w-full text-right mt-2">
-                  <span className="text-lg font-bold bg-black px-4 py-1 rounded">048</span>
+                  <span className={`${libreBarcode.className} text-4xl py-1 rounded`}>
+                    {currentPortfolio.author}
+                  </span>
                 </div>
               </div>
             </div>
