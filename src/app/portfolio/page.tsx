@@ -59,7 +59,7 @@ const PortfolioPage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="w-full px-12 py-4">
+      <div className="w-full px-6 sm:px-8 md:px-12 py-4">
         <div className="flex items-center justify-between mb-4 border-b border-black">
           <h1 className="text-3xl font-serif">PORTFOLIO</h1>
           <span className="text-lg font-bold bg-black text-white px-4 py-1">048</span>
@@ -89,12 +89,32 @@ const PortfolioPage: React.FC = () => {
                 width={1200}
                 height={608}
                 onClick={handleImageClick}
-                className="w-full h-[38rem] object-cover mb-6 cursor-pointer transition-all duration-300 group-hover:brightness-75"
+                className="w-full h-48 sm:h-64 md:h-[28rem] lg:h-[38rem] object-cover mb-2 cursor-pointer transition-all duration-300 group-hover:brightness-75"
                 priority
               />
               {/* Shimmer effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
             </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Color Bar: always below image, full width */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`colors-${currentIndex}`}
+            initial={{ opacity: 0, x: direction === 1 ? 100 : direction === -1 ? -100 : 0 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: direction === 1 ? -100 : direction === -1 ? 100 : 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="flex w-full items-center gap-4 mb-6"
+          >
+            {currentPortfolio.colors.map((color, idx) => (
+              <div
+                key={idx}
+                className="h-5 flex-1"
+                style={{ background: color }}
+              />
+            ))}
           </motion.div>
         </AnimatePresence>
 
@@ -125,49 +145,40 @@ const PortfolioPage: React.FC = () => {
             </AnimatePresence>
           </div>
 
-          {/* Right: Colors, Author, Navigation */}
-          <div className="flex flex-col items-start md:items-end gap-4 min-w-[500px]">
-            {/* Colors bar Animation */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`colors-${currentIndex}`}
-                initial={{ 
-                  opacity: 0, 
-                  x: direction === 1 ? 100 : direction === -1 ? -100 : 0 
-                }}
-                animate={{ 
-                  opacity: 1, 
-                  x: 0 
-                }}
-                exit={{ 
-                  opacity: 0, 
-                  x: direction === 1 ? -100 : direction === -1 ? 100 : 0 
-                }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="flex w-full items-center gap-4"
-              >
-                {currentPortfolio.colors.map((color, idx) => (
-                  <div
-                    key={idx}
-                    className="h-5 flex-1"
-                    style={{ background: color }}
-                  />
-                ))}
-              </motion.div>
-            </AnimatePresence>
+          {/* Horizontal line for mobile */}
+          <div className="block md:hidden border-t border-border" />
 
+          {/* Right: Author, Navigation */}
+          <div className="flex flex-col items-start md:items-end gap-4 w-full md:w-[220px] lg:w-[260px] xl:w-[320px]">
             {/* Static Navigation and Author Info */}
             <div className="w-full">
+              {/* Arrows above image on mobile */}
+              <div className="flex justify-between mb-2 md:hidden">
+                <button 
+                  className="rounded-full border-2 border-gray-800 p-2 text-sm md:text-base hover:bg-gray-800 hover:text-white transition-colors"
+                  onClick={handlePrevious}
+                >
+                  <ArrowLeft className="w-5 h-5" />
+                </button>
+                <button 
+                  className="rounded-full border-2 border-gray-800 p-2 ml-2 text-sm md:text-base hover:bg-gray-800 hover:text-white transition-colors"
+                  onClick={handleNext}
+                >
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Arrows in sidebar on desktop */}
               <div className="hidden md:block border-l-2 border-black ml-24 pl-8">
                 <div className="w-full text-right mb-2">
                   <button 
-                    className="rounded-full border-2 border-gray-800 p-2 hover:bg-gray-800 hover:text-white transition-colors"
+                    className="rounded-full border-2 border-gray-800 p-2 text-sm md:text-base hover:bg-gray-800 hover:text-white transition-colors"
                     onClick={handlePrevious}
                   >
                     <ArrowLeft className="w-5 h-5" />
                   </button>
                   <button 
-                    className="rounded-full border-2 border-gray-800 p-2 ml-2 hover:bg-gray-800 hover:text-white transition-colors"
+                    className="rounded-full border-2 border-gray-800 p-2 ml-2 text-sm md:text-base hover:bg-gray-800 hover:text-white transition-colors"
                     onClick={handleNext}
                   >
                     <ArrowRight className="w-5 h-5" />
