@@ -163,14 +163,44 @@ const MobileHeader = ({
 };
 
 const Header = () => {
-    const { theme, setTheme } = useTheme();
+    const { setTheme, resolvedTheme } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    // Prevent hydration mismatch
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    // Don't render theme-dependent content until mounted
+    if (!mounted) {
+        return (
+            <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+                <div className="hidden md:flex w-full h-14 items-center px-4 sm:px-6 lg:px-8">
+                    <Link href="/" className="mr-4 sm:mr-6 lg:mr-8 flex items-center space-x-2">
+                        <span className="font-bold">WESTON CADENA</span>
+                    </Link>
+                    <div className="flex-1" />
+                    <div className="h-8 w-8 ml-4" />
+                </div>
+                <div className="md:hidden px-4 pb-4">
+                    <div className="w-full flex h-14 items-center justify-between">
+                        <div className="h-8 w-8" />
+                        <Link href="/" className="flex items-center space-x-2">
+                            <span className="font-bold">WESTON CADENA</span>
+                        </Link>
+                        <div className="h-8 w-8" />
+                    </div>
+                </div>
+            </header>
+        );
+    }
 
     return (
         <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <DesktopHeader theme={theme} setTheme={setTheme} />
+            <DesktopHeader theme={resolvedTheme} setTheme={setTheme} />
             <MobileHeader
-                theme={theme}
+                theme={resolvedTheme}
                 setTheme={setTheme}
                 isMenuOpen={isMenuOpen}
                 setIsMenuOpen={setIsMenuOpen}

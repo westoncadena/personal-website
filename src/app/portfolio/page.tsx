@@ -48,10 +48,12 @@ const PortfolioPage: React.FC = () => {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right, 0 for initial
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const currentPortfolio = portfolios[currentIndex];
 
   const handleImageClick = () => {
+    setIsNavigating(true);
     const slug = currentPortfolio.title.toLowerCase();
     router.push(`/portfolio/${slug}`);
   };
@@ -109,6 +111,20 @@ const PortfolioPage: React.FC = () => {
               />
               {/* Shimmer effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
+              
+              {/* Loading overlay */}
+              {isNavigating && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="absolute inset-0 bg-black/50 flex items-center justify-center"
+                >
+                  <div className="flex flex-col items-center space-y-3">
+                    <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span className="text-white text-sm font-medium">Loading...</span>
+                  </div>
+                </motion.div>
+              )}
             </div>
           </motion.div>
         </AnimatePresence>
