@@ -71,7 +71,7 @@ const PortfolioPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center pb-8">
       <div className="w-full px-6 sm:px-8 md:px-12 py-4">
         <div className="flex items-center justify-between mb-4 border-b border-border">
           <h1 className="text-3xl font-serif text-foreground">PORTFOLIO</h1>
