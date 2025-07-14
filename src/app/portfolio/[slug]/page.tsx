@@ -47,20 +47,23 @@ export default function PortfolioSlugPage() {
       {/* Masonry layout */}
       <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
         {images.map((img: PortfolioImage, idx: number) => (
-          <Image
-            key={idx}
-            src={img.src}  // This is now the optimized thumbnail
-            alt={img.alt}
-            width={img.orientation === "vertical" ? 400 : 600}
-            height={img.orientation === "vertical" ? 600 : 400}
-            onClick={() => { setIndex(idx); setOpen(true); }}
-            className={
-              (img.orientation === "vertical"
-                ? "w-full aspect-[2/3]"
-                : "w-full aspect-[3/2]") +
-              " object-cover mb-4 break-inside-avoid cursor-pointer transition-transform active:scale-95 md:hover:scale-105"
-            }
-          />
+          <div key={idx} className="relative group overflow-hidden mb-4 break-inside-avoid">
+            <Image
+              src={img.src}  // This is now the optimized thumbnail
+              alt={img.alt}
+              width={img.orientation === "vertical" ? 400 : 600}
+              height={img.orientation === "vertical" ? 600 : 400}
+              onClick={() => { setIndex(idx); setOpen(true); }}
+              className={
+                (img.orientation === "vertical"
+                  ? "w-full aspect-[2/3]"
+                  : "w-full aspect-[3/2]") +
+                " object-cover cursor-pointer transition-all duration-300 group-hover:brightness-75"
+              }
+            />
+            {/* Shimmer effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
+          </div>
         ))}
       </div>
       <Lightbox
