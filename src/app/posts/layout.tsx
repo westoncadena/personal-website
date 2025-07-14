@@ -28,7 +28,7 @@ export default async function RootLayout({
 
     return (
 
-        <div>
+        <div className="pb-16">
             {children}
         </div>
     );

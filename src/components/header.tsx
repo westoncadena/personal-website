@@ -14,8 +14,8 @@ import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 
 const DesktopHeader = ({ theme, setTheme }: { theme: string | undefined, setTheme: (theme: string) => void }) => (
-    <div className="hidden md:flex container h-14 items-center px-8 py-8">
-        <Link href="/" className="mr-8 flex items-center space-x-2">
+    <div className="hidden md:flex w-full h-14 items-center px-4 sm:px-6 lg:px-8">
+        <Link href="/" className="mr-4 sm:mr-6 lg:mr-8 flex items-center space-x-2">
             <span className="font-bold">WESTON CADENA</span>
         </Link>
 
@@ -54,6 +54,12 @@ const DesktopHeader = ({ theme, setTheme }: { theme: string | undefined, setThem
                 </MenubarContent>
             </MenubarMenu> */}
 
+            <Link href="/portfolio">
+                <MenubarMenu>
+                    <MenubarTrigger className="font-medium">Portfolio</MenubarTrigger>
+                </MenubarMenu>
+            </Link>
+
             <Link href="/posts">
                 <MenubarMenu>
                     <MenubarTrigger className="font-medium">Blog</MenubarTrigger>
@@ -65,6 +71,8 @@ const DesktopHeader = ({ theme, setTheme }: { theme: string | undefined, setThem
                     <MenubarTrigger className="font-medium">Contact</MenubarTrigger>
                 </MenubarMenu>
             </Link>
+
+
         </Menubar>
 
         <Button
@@ -99,15 +107,17 @@ const MobileHeader = ({
             }
         };
 
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [setIsMenuOpen]);
+        if (isMenuOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+            return () => {
+                document.removeEventListener('mousedown', handleClickOutside);
+            };
+        }
+    }, [isMenuOpen, setIsMenuOpen]);
 
     return (
-        <div className="md:hidden px-4">
-            <div className="container flex h-14 items-center justify-between">
+        <div className="md:hidden px-4 pb-4" ref={menuRef}>
+            <div className="w-full flex h-14 items-center justify-between">
                 <Button
                     variant="ghost"
                     size="icon"
@@ -133,16 +143,16 @@ const MobileHeader = ({
             </div>
 
             {isMenuOpen && (
-                <nav ref={menuRef} className="border-t flex flex-col space-y-4 p-4 bg-background/95 backdrop-blur">
-                    <Link href="/about" className="px-4 py-2 hover:bg-accent rounded-md">
+                <nav className="border-t border-b flex flex-col space-y-4 p-4 bg-background/95 backdrop-blur">
+                    <Link href="/about" className="px-4 py-2 hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>
                         About
+                    </Link>
+                    <Link href="/portfolio" className="px-4 py-2 hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>
+                        Portfolio
                     </Link>
                     <Link href="/posts" className="px-4 py-2 hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>
                         Blog
                     </Link>
-                    {/* <Link href="/projects" className="px-4 py-2 hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>
-                        Projects
-                    </Link> */}
                     <Link href="/contact" className="px-4 py-2 hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>
                         Contact
                     </Link>
@@ -153,14 +163,44 @@ const MobileHeader = ({
 };
 
 const Header = () => {
-    const { theme, setTheme } = useTheme();
+    const { setTheme, resolvedTheme } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    // Prevent hydration mismatch
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    // Don't render theme-dependent content until mounted
+    if (!mounted) {
+        return (
+            <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+                <div className="hidden md:flex w-full h-14 items-center px-4 sm:px-6 lg:px-8">
+                    <Link href="/" className="mr-4 sm:mr-6 lg:mr-8 flex items-center space-x-2">
+                        <span className="font-bold">WESTON CADENA</span>
+                    </Link>
+                    <div className="flex-1" />
+                    <div className="h-8 w-8 ml-4" />
+                </div>
+                <div className="md:hidden px-4 pb-4">
+                    <div className="w-full flex h-14 items-center justify-between">
+                        <div className="h-8 w-8" />
+                        <Link href="/" className="flex items-center space-x-2">
+                            <span className="font-bold">WESTON CADENA</span>
+                        </Link>
+                        <div className="h-8 w-8" />
+                    </div>
+                </div>
+            </header>
+        );
+    }
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <DesktopHeader theme={theme} setTheme={setTheme} />
+        <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+            <DesktopHeader theme={resolvedTheme} setTheme={setTheme} />
             <MobileHeader
-                theme={theme}
+                theme={resolvedTheme}
                 setTheme={setTheme}
                 isMenuOpen={isMenuOpen}
                 setIsMenuOpen={setIsMenuOpen}

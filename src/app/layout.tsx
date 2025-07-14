@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getGlobalData } from '@/lib/cosmic';
-
+import { Analytics } from '@vercel/analytics/react';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +39,7 @@ export default function RootLayout({
         >
           <Header />
           {children}
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
