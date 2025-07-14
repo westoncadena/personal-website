@@ -37,13 +37,13 @@ const PortfolioList: React.FC<PortfolioListProps> = ({ portfolios }) => {
             className="bg-card shadow p-4 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] group"
             onClick={() => handlePortfolioClick(portfolio)}
           >
-            <div className="relative overflow-hidden mb-3">
+            <div className="relative overflow-hidden mb-3 aspect-[3/2]">
               <Image
                 src={portfolio.image}
                 alt={portfolio.title}
                 width={400}
-                height={160}
-                className="w-full h-40 object-cover transition-all duration-300 group-hover:brightness-75"
+                height={267}
+                className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-75"
               />
               {/* Shimmer effect similar to main portfolio page */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
