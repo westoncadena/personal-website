@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PortfolioList from '@components/porfolio/portfolio-list';
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from 'next/image';
@@ -26,6 +26,11 @@ const PortfolioPage: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right, 0 for initial
   const [isNavigating, setIsNavigating] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const currentPortfolio = portfolios[currentIndex];
 
@@ -48,6 +53,23 @@ const PortfolioPage: React.FC = () => {
       prev === portfolios.length - 1 ? 0 : prev + 1
     );
   };
+
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!isMounted) {
+    return (
+      <div className="min-h-screen flex items-center justify-center pb-8">
+        <div className="w-full px-6 sm:px-8 md:px-12 py-4">
+          <div className="flex items-center justify-between mb-4 border-b border-border">
+            <h1 className="text-3xl font-serif text-foreground">PORTFOLIO</h1>
+            <span className="text-lg font-bold bg-primary text-primary-foreground px-4 py-1">
+              001
+            </span>
+          </div>
+          <div className="w-full h-48 sm:h-64 md:h-[28rem] lg:h-[38rem] bg-muted animate-pulse rounded"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center pb-8">
