@@ -42,3 +42,20 @@ export interface Author {
         };
     };
 }
+
+export interface PortfolioImage {
+    src: string;           // Optimized thumbnail for gallery
+    fullSrc: string;       // Optimized full-size for lightbox
+    width: number;
+    height: number;
+    alt: string;
+    orientation: 'horizontal' | 'vertical';
+}
+
+export interface CloudinaryResource {
+    public_id: string;
+    secure_url: string;
+    width: number;
+    height: number;
+    format: string;
+}

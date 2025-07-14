@@ -1,22 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
-
-// TypeScript interfaces
-interface CloudinaryResource {
-  public_id: string;
-  secure_url: string;
-  width: number;
-  height: number;
-  format: string;
-}
-
-interface PortfolioImage {
-  src: string;
-  width: number;
-  height: number;
-  alt: string;
-  orientation: 'horizontal' | 'vertical';
-}
+import { CloudinaryResource, PortfolioImage } from '@/lib/types';
 
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -41,14 +25,35 @@ export async function GET(request: NextRequest) {
       .max_results(100)
       .execute();
 
-    // Format the images for your frontend
-    const images: PortfolioImage[] = result.resources.map((img: CloudinaryResource) => ({
-      src: img.secure_url,
-      width: img.width,
-      height: img.height,
-      alt: img.public_id,
-      orientation: img.width > img.height ? 'horizontal' : 'vertical',
-    }));
+    // Format the images for your frontend with optimized URLs
+    const images: PortfolioImage[] = result.resources.map((img: CloudinaryResource) => {
+      // Create optimized thumbnail URL for gallery view
+      const thumbnailUrl = cloudinary.url(img.public_id, {
+        format: 'jpg',
+        quality: 'auto',
+        width: img.width > img.height ? 600 : 400,
+        height: img.width > img.height ? 400 : 600,
+        crop: 'fill'
+      });
+
+      // Create optimized full-size URL for lightbox
+      const fullSizeUrl = cloudinary.url(img.public_id, {
+        format: 'jpg',
+        quality: 'auto',
+        width: img.width > img.height ? 1200 : 800,
+        height: img.width > img.height ? 800 : 1200,
+        crop: 'limit' // Don't upscale if smaller
+      });
+
+      return {
+        src: thumbnailUrl,        // Optimized for gallery
+        fullSrc: fullSizeUrl,     // Optimized for lightbox
+        width: img.width,
+        height: img.height,
+        alt: img.public_id,
+        orientation: img.width > img.height ? 'horizontal' : 'vertical',
+      };
+    });
 
     return NextResponse.json({ resources: images });
   } catch (error: unknown) {
