@@ -33,16 +33,16 @@ export default function Home() {
             </p>
             <div className="flex gap-4">
               <Link
-                href="/contact"
+                href="/about"
                 className="inline-flex items-center justify-center rounded-md bg-white/90 px-6 py-3 text-sm font-medium text-black hover:bg-white"
               >
-                Contact Me
+                About Me
               </Link>
               <Link
-                href="/about"
+                href="/portfolio"
                 className="inline-flex items-center justify-center rounded-md border border-white/30 px-6 py-3 text-sm font-medium text-white hover:bg-white/20"
               >
-                About Me
+                View Portfolio
               </Link>
               <Link
                 href="/posts"
