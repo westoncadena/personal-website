@@ -10,6 +10,7 @@ export type Portfolio = {
   description: string;
   colors: string[];
   author: string;
+  slug: string;
 };
 
 type PortfolioListProps = {
